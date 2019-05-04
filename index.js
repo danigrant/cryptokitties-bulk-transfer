@@ -5,6 +5,7 @@ const abi = require('./abi.js')
 require('dotenv').config()
 
 const cryptoKittyIds = [1437926, 1448284]
+const walletAddresses = []
 
 const web3 = new Web3(new HDWalletProvider(process.env.MNENOMIC, "https://mainnet.infura.io/v3/62df5323062344249adb11c3403dba29"))
 
@@ -17,7 +18,7 @@ void async function main() {
   // lets go
   for (let i = 0; i < cryptoKittyIds.length; i++) {
     console.log(`getting ${cryptoKittyIds[i]}`);
-    ckContract.methods.approve('0xAC80f8FefE1F14F40fFf2Bf96210a5B46e0DfD26', cryptoKittyIds[i]).send()
-    ckContract.methods.transferFrom(account, '0xAC80f8FefE1F14F40fFf2Bf96210a5B46e0DfD26', cryptoKittyIds[i]).send()
+    ckContract.methods.approve(walletAddresses[i], cryptoKittyIds[i]).send()
+    ckContract.methods.transferFrom(account, walletAddresses[i], cryptoKittyIds[i]).send()
   }
 }()
